@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EntityScan("com.epam.esm")
 @EnableJpaRepositories("com.epam.esm")
 @EnableJpaAuditing
+@EnableWebSecurity
 @SpringBootApplication
 public class SpringSecurityApplication {
 
