@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public interface GiftCertificateRepository extends JpaRepository<Long, GiftCertificate> {
+public interface GiftCertificateRepository extends JpaRepository<GiftCertificate, Long> {
     @Query("select c from GiftCertificate c where c.name like ?1")
     Page<GiftCertificate> findByPartOfName(String name, Pageable pageable);
 

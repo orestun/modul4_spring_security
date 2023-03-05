@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Table(name = "order")
+@Table(name = "orders")
 @Entity
 @Getter
 @Setter

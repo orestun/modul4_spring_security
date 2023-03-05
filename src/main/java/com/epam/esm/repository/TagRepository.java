@@ -4,7 +4,7 @@ import com.epam.esm.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface TagRepository extends JpaRepository<Long , Tag> {
+public interface TagRepository extends JpaRepository<Tag, Long> {
 
     Tag findByName(String name);
     boolean existsByName(String name);
