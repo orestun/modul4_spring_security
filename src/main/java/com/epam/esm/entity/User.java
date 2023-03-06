@@ -42,6 +42,12 @@ public class User {
     @Size(min = 8,message = "Password length of chars should be more than 8")
     private String password;
 
+    public User(String name, String surname, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
