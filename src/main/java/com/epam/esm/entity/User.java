@@ -2,11 +2,9 @@ package com.epam.esm.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -14,11 +12,12 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -42,10 +41,15 @@ public class User {
     @Size(min = 8,message = "Password length of chars should be more than 8")
     private String password;
 
-    public User(String name, String surname, String email) {
+    @ElementCollection
+    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "user_id"))
+    private List<Role> roles;
+
+    public User(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.password = password;
     }
 
     @Override

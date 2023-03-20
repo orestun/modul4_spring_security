@@ -1,6 +1,7 @@
 package com.epam.esm.service;
 
 import com.epam.esm.entity.Order;
+import com.epam.esm.entity.Role;
 import com.epam.esm.entity.User;
 import com.epam.esm.exception.DataValidationHandler;
 import com.epam.esm.exception.HibernateValidationException;
@@ -8,6 +9,7 @@ import com.epam.esm.exception.ItemNotFoundException;
 import com.epam.esm.exception.ObjectAlreadyExistsException;
 import com.epam.esm.repository.OrderRepository;
 import com.epam.esm.repository.UserRepository;
+import com.epam.esm.utils.Roles;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class UserService {
     public List<User> getAllUsers(Integer page, Integer pageSize){
 
         page-=1;
-
+        System.out.println(userRepository.findAll());
         return userRepository.
                 findAll(PageRequest.of(page, pageSize)).
                 get().
@@ -65,6 +67,7 @@ public class UserService {
                     String.format("There is user with - '%s' email",user.getEmail()),
                     40901L);
         }
+        user.setRoles(List.of(new Role(Roles.ROLE_USER)));
         return userRepository.save(user);
     }
 

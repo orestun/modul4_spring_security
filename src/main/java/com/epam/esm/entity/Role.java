@@ -1,15 +1,19 @@
 package com.epam.esm.entity;
 
+import com.epam.esm.utils.Roles;
 import jakarta.persistence.*;
+import lombok.Getter;
 
-@Entity
-@Table
+@Embeddable
+@Getter
 public class Role{
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
     private String role;
-    private Long userId;
+
+    public Role(Roles role) {
+        this.role = role.name();
+    }
+
+    public Role() {
+
+    }
 }

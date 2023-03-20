@@ -39,6 +39,7 @@ public class UserController {
             @RequestParam(value = "page", defaultValue = "1") Integer page,
             @RequestParam(value = "page-size", defaultValue = "10") Integer pageSize
     ){
+
         return userService.
                 getAllUsers(page, pageSize).
                 stream().map(userMapper::toDto).

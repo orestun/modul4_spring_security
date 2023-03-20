@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import java.util.Objects;
 

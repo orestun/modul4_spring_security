@@ -1,6 +1,6 @@
 package com.epam.esm.utils;
 
-public enum Role {
+public enum Roles {
     ROLE_USER,
     ROLE_ADMIN
 }
