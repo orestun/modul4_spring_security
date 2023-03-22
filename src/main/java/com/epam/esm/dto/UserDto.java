@@ -9,7 +9,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class UserDto extends RepresentationModel<UserDto> {
 
     private Long id;
@@ -19,4 +18,11 @@ public class UserDto extends RepresentationModel<UserDto> {
     private String password;
     private List<String> roles;
 
+    public UserDto(Long id, String name, String surname, String email, List<String> roles) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.roles = roles;
+    }
 }

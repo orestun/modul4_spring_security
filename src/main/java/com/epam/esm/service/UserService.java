@@ -14,6 +14,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,9 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class UserService {
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     private final UserRepository userRepository;
@@ -68,6 +73,7 @@ public class UserService {
                     40901L);
         }
         user.setRoles(List.of(new Role(Roles.ROLE_USER)));
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
 

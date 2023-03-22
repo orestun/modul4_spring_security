@@ -41,7 +41,7 @@ public class User {
     @Size(min = 8,message = "Password length of chars should be more than 8")
     private String password;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "user_id"))
     private List<Role> roles;
 
