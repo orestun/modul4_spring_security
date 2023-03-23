@@ -21,10 +21,7 @@ public class ApiExceptionHandler {
     public ResponseEntity<Object> handleItemNotFoundException(ItemNotFoundException e){
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
         ApiExceptionBody exceptionBody =
-                new ApiExceptionBody(
-                        e.getMessage(),
-                        e.getErrorCode(),
-                        httpStatus);
+                getApiExceptionBody(e, httpStatus, e.getErrorCode());
         return new ResponseEntity<>(exceptionBody, httpStatus);
     }
 
@@ -36,10 +33,7 @@ public class ApiExceptionHandler {
     public ResponseEntity<Object> handleObjectAlreadyExistsException(ObjectAlreadyExistsException e){
         HttpStatus httpStatus = HttpStatus.CONFLICT;
         ApiExceptionBody exceptionBody =
-                new ApiExceptionBody(
-                        e.getMessage(),
-                        e.getErrorCode(),
-                        httpStatus);
+                getApiExceptionBody(e, httpStatus, e.getErrorCode());
         return new ResponseEntity<>(exceptionBody, httpStatus);
     }
 
@@ -51,10 +45,7 @@ public class ApiExceptionHandler {
     public ResponseEntity<Object> handleHibernateValidationException(HibernateValidationException e){
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
         ApiExceptionBody exceptionBody =
-                new ApiExceptionBody(
-                        e.getMessage(),
-                        e.getErrorCode(),
-                        httpStatus);
+                getApiExceptionBody(e, httpStatus, e.getErrorCode());
         return new ResponseEntity<>(exceptionBody, httpStatus);
     }
 
@@ -66,10 +57,22 @@ public class ApiExceptionHandler {
     public ResponseEntity<Object> handleNotAllowedParameterException(NotAllowedParameterException e){
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
         ApiExceptionBody exceptionBody =
-                new ApiExceptionBody(
-                        e.getMessage(),
-                        e.getErrorCode(),
-                        httpStatus);
+                getApiExceptionBody(e, httpStatus, e.getErrorCode());
         return new ResponseEntity<>(exceptionBody, httpStatus);
+    }
+
+    @ExceptionHandler(value = {BadAuthenticationData.class})
+    public ResponseEntity<Object> handleBadAuthenticationDataException(BadAuthenticationData e){
+        HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
+        ApiExceptionBody exceptionBody =
+                getApiExceptionBody(e, httpStatus, e.getErrorCode());
+        return new ResponseEntity<>(exceptionBody, httpStatus);
+    }
+
+    private ApiExceptionBody getApiExceptionBody(Exception e, HttpStatus status, Long errorCode){
+        return new ApiExceptionBody(
+                e.getMessage(),
+                errorCode,
+                status);
     }
 }
