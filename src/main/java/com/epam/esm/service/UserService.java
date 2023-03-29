@@ -14,7 +14,6 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,6 @@ public class UserService {
 
     @Autowired
     private final PasswordEncoder passwordEncoder;
-
     @Autowired
     private final UserRepository userRepository;
     @Autowired
@@ -72,10 +70,48 @@ public class UserService {
                     String.format("There is user with - '%s' email",user.getEmail()),
                     40901L);
         }
+        this.validatePassword(user.getPassword());
         user.setRoles(List.of(new Role(Roles.ROLE_USER)));
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    private void validatePassword(String password){
+        if(passwordHasError(password)){
+            String errorMessage = getErrorMessageForPassword(password);
+            throw new HibernateValidationException(
+                    errorMessage,
+                    40404L);
+        }
+    }
+
+    private boolean isPasswordNull(String password){
+        return password == null;
+    }
+
+    private boolean isPasswordLessThen8Chars(String password){
+        return password != null && password.length()<8;
+    }
+
+    private boolean passwordHasError(String password){
+        return isPasswordNull(password) || isPasswordLessThen8Chars(password);
+    }
+
+    private String getErrorMessageForPassword(String password) {
+        if (isPasswordNull(password)) {
+            return "Password can`t be null";
+        } else if (isPasswordLessThen8Chars(password)) {
+            return "Password length of chars should be more than 8";
+        } else {
+            return "unexpected error";
+        }
+    }
+
+    public void addNewUserForOAuth2AuthenticatedUser(User user){
+        user.setRoles(List.of(new Role(Roles.ROLE_USER)));
+        userRepository.save(user);
+    }
+
 
     public List<Order> getOrdersByUserId(Long userId,
                                          Integer page,
