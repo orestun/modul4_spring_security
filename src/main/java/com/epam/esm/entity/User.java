@@ -37,8 +37,6 @@ public class User {
     @Email(message = "Incorrect email input")
     private String email;
 
-    @NotNull(message = "Password can`t be null")
-    @Size(min = 8,message = "Password length of chars should be more than 8")
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -50,6 +48,12 @@ public class User {
         this.surname = surname;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String name, String surname, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
     }
 
     @Override
