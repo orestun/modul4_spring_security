@@ -1,29 +1,34 @@
 package com.epam.esm.config;
 
-import com.epam.esm.repository.UserRepository;
-import com.epam.esm.service.UserDetailsServiceImpl;
+import com.epam.esm.filter.JwtFilter;
 import com.epam.esm.utils.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig{
     @Autowired
-    UserRepository userRepository;
+    JwtFilter jwtFilter;
+    @Autowired
+    AuthenticationProvider authenticationProvider;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable().
                 authorizeHttpRequests().
                 requestMatchers(HttpMethod.GET, "/certificate", "/tag", "/user", "/order").
                 permitAll().
-                requestMatchers(HttpMethod.GET,"/user/**", "/certificate/**").
+                requestMatchers(HttpMethod.POST, "/authenticate", "/authenticate-google", "/sign-up-user").
+                permitAll().
+                requestMatchers(HttpMethod.GET,"/user/**", "/certificate/**", "/tag/**").
                 hasAnyAuthority(Roles.ROLE_ADMIN.name(), Roles.ROLE_USER.name()).
                 requestMatchers(HttpMethod.POST, "/order").
                 hasAnyAuthority(Roles.ROLE_ADMIN.name(), Roles.ROLE_USER.name()).
@@ -34,26 +39,11 @@ public class SecurityConfig{
                 requestMatchers(HttpMethod.PATCH, "/certificate/**").
                 hasAuthority(Roles.ROLE_ADMIN.name()).
                 and().
-                httpBasic().
+                sessionManagement().
+                sessionCreationPolicy(SessionCreationPolicy.STATELESS).
                 and().
+                authenticationProvider(authenticationProvider).
+                addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class).
                 build();
-    }
-
-    @Bean
-    public UserDetailsServiceImpl userDetailsService(){
-        return new UserDetailsServiceImpl(userRepository);
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
-        authProvider.setPasswordEncoder(encoderBCrypt());
-        return authProvider;
-    }
-
-    @Bean
-    PasswordEncoder encoderBCrypt(){
-        return new BCryptPasswordEncoder();
     }
 }
