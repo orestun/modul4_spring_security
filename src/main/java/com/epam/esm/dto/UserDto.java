@@ -1,6 +1,5 @@
 package com.epam.esm.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
@@ -16,6 +15,7 @@ public class UserDto extends RepresentationModel<UserDto> {
     private String surname;
     private String email;
     private String password;
+    private String repeatPassword;
     private List<String> roles;
 
     public UserDto(Long id, String name, String surname, String email, List<String> roles) {
