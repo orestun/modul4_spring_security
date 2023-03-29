@@ -1,6 +1,5 @@
 package com.epam.esm.controller;
 
-import com.epam.esm.dto.AuthenticationBody;
 import com.epam.esm.dto.OrderDto;
 import com.epam.esm.dto.UserDto;
 import com.epam.esm.entity.User;
@@ -21,7 +20,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     private final UserService userService;
-
     private final UserMapper userMapper = new UserMapper();
     private final OrderMapper orderMapper = new OrderMapper();
 
@@ -86,10 +84,5 @@ public class UserController {
         return orderMapper.
                 toOrderDto(userService.
                         getOrderByIdForUserId(orderId,userId));
-    }
-
-    @PostMapping("authenticate")
-    public void authenticate(@RequestBody AuthenticationBody authBody){
-
     }
 }
