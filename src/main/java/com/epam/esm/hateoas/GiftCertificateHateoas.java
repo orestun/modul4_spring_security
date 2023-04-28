@@ -155,7 +155,7 @@ public class GiftCertificateHateoas {
 
     /**
      * Hateoas method that add links to GiftCertificate objects got as
-     * result of method {@link GiftCertificateController#updateGiftCertificate(Long, GiftCertificateDTO)}
+     * result of method {@link GiftCertificateController#updateGiftCertificate(Long, GiftCertificateDto)}
      * and {@link GiftCertificateController#updateGiftCertificateBySomeFields(Long, String, String, BigDecimal, Integer)}
      *
      * @param certificate gift certificate that was updated
@@ -172,7 +172,7 @@ public class GiftCertificateHateoas {
 
     /**
      * Hateoas method that add links to GiftCertificate object got as
-     * result of method {@link GiftCertificateController#addNewGiftCertificate(GiftCertificateDTO)}
+     * result of method {@link GiftCertificateController#addNewGiftCertificate(GiftCertificateDto)}
      *
      * @param certificate gift certificate that was added in DB
      *

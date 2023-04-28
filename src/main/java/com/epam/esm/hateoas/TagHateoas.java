@@ -29,7 +29,7 @@ public class TagHateoas {
 
     /**
      * Hateoas method that add links to Tag objects got as
-     * result of method {@link TagController#getAllTags(Integer, Integer)}
+     * result of method {@link com.epam.esm.controller.TagController#getAllTags(Integer, Integer)}
      *
      * @param tags list of tags that was get from DB
      *
@@ -46,7 +46,7 @@ public class TagHateoas {
 
     /**
      * Hateoas method that add links to Tag objects got as
-     * result of method {@link TagController#addNewTag(TagDTO)}
+     * result of method {@link com.epam.esm.controller.TagController#addNewTag(TagDto)}
      *
      * @param tagDTO tag that was added to DB
      *
