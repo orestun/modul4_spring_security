@@ -28,7 +28,7 @@ public class AuthenticationController {
 
 
     @PostMapping("authenticate-google")
-    public ResponseEntity<?> authenticateGoogle(@RequestParam("access-token") String token){
+    public ResponseEntity<?> authenticateGoogle(@RequestParam("id-token") String token){
         return ResponseEntity.ok(
                 Map.of("token",
                         authenticationService.authenticateGoogle(token)));
