@@ -1,7 +1,12 @@
 package com.epam.esm.config;
 
+import com.epam.esm.feignClient.CustomFeignClient;
+import com.epam.esm.feignClient.FeignClientDecoderFromJsonToMap;
 import com.epam.esm.repository.UserRepository;
 import com.epam.esm.service.UserDetailsServiceImpl;
+import com.google.gson.Gson;
+import feign.Feign;
+import feign.jackson.JacksonEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,5 +42,14 @@ public class ApplicationConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public CustomFeignClient customFeignClient(){
+        return Feign.
+                    builder().
+                    decoder(new FeignClientDecoderFromJsonToMap(new Gson())).
+                    encoder(new JacksonEncoder()).
+                    target(CustomFeignClient.class, "https://oauth2.googleapis.com/tokeninfo");
     }
 }

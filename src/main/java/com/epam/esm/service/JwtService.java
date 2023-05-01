@@ -1,5 +1,6 @@
 package com.epam.esm.service;
 
+import ch.qos.logback.core.testUtil.MockInitialContext;
 import com.epam.esm.exception.ItemNotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -58,7 +59,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyInBase64);
     }
 
-    private Claims extractAllClaims(String token) throws Throwable {
+    public Claims extractAllClaims(String token) throws Throwable {
         Claims claims;
         try{
             claims = Jwts.
@@ -74,7 +75,6 @@ public class JwtService {
     }
 
     public String getUsername(String token) throws Throwable {
-        Claims c = extractAllClaims(token);
         return extractAllClaims(token).getSubject();
     }
 

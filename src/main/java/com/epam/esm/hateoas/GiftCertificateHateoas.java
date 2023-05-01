@@ -68,15 +68,15 @@ public class GiftCertificateHateoas {
             List<GiftCertificateDto> giftCertificateDTOList){
         for(GiftCertificateDto certificate: giftCertificateDTOList){
             Long id = certificate.getId();
-            certificate.add(updateGiftCertificateById(id,certificate));
-            certificate.add(deleteGiftCertificateById(id));
-            certificate.add(sortGiftCertificateByCreateDateLink);
-            certificate.add(sortGiftCertificateByNameLink);
-            certificate.add(sortGiftCertificateByPriceLink);
-            certificate.add(findGiftCertificateByNameLink);
-            certificate.add(findGiftCertificateByDescriptionLink);
-            certificate.add(findGiftCertificateBySeveralTagsLink);
-            certificate.add(findGiftCertificateByNameLink);
+            certificate.add(updateGiftCertificateById(id,certificate))
+                    .add(deleteGiftCertificateById(id))
+                    .add(sortGiftCertificateByCreateDateLink)
+                    .add(sortGiftCertificateByNameLink)
+                    .add(sortGiftCertificateByPriceLink)
+                    .add(findGiftCertificateByNameLink)
+                    .add(findGiftCertificateByDescriptionLink)
+                    .add(findGiftCertificateBySeveralTagsLink)
+                    .add(findGiftCertificateByNameLink);
         }
         return giftCertificateDTOList;
     }
@@ -94,12 +94,12 @@ public class GiftCertificateHateoas {
              List<GiftCertificateDto> giftCertificateDTOList){
          for(GiftCertificateDto certificate: giftCertificateDTOList) {
              Long id = certificate.getId();
-             certificate.add(updateGiftCertificateById(id,certificate));
-             certificate.add(deleteGiftCertificateById(id));
-             certificate.add(findGiftCertificateByNameLink);
-             certificate.add(findGiftCertificateByDescriptionLink);
-             certificate.add(findGiftCertificateBySeveralTagsLink);
-             certificate.add(findGiftCertificateByNameLink);
+             certificate.add(updateGiftCertificateById(id,certificate))
+                     .add(deleteGiftCertificateById(id))
+                     .add(findGiftCertificateByNameLink)
+                     .add(findGiftCertificateByDescriptionLink)
+                     .add(findGiftCertificateBySeveralTagsLink)
+                     .add(findGiftCertificateByNameLink);
          }
          return giftCertificateDTOList;
      }
@@ -117,13 +117,13 @@ public class GiftCertificateHateoas {
              List<GiftCertificateDto> giftCertificateDTOList){
         for (GiftCertificateDto certificate:giftCertificateDTOList){
             Long id = certificate.getId();
-            certificate.add(updateGiftCertificateById(id,certificate));
-            certificate.add(deleteGiftCertificateById(id));
-            certificate.add(sortGiftCertificateByCreateDateLink);
-            certificate.add(sortGiftCertificateByNameLink);
-            certificate.add(sortGiftCertificateByPriceLink);
-            certificate.add(findGiftCertificateBySeveralTagsLink);
-            certificate.add(findGiftCertificateByNameLink);
+            certificate.add(updateGiftCertificateById(id,certificate))
+                    .add(deleteGiftCertificateById(id))
+                    .add(sortGiftCertificateByCreateDateLink)
+                    .add(sortGiftCertificateByNameLink)
+                    .add(sortGiftCertificateByPriceLink)
+                    .add(findGiftCertificateBySeveralTagsLink)
+                    .add(findGiftCertificateByNameLink);
         }
         return giftCertificateDTOList;
      }
@@ -141,14 +141,14 @@ public class GiftCertificateHateoas {
      ){
          for(GiftCertificateDto certificate:giftCertificateDTOList){
              Long id = certificate.getId();
-             certificate.add(updateGiftCertificateById(id,certificate));
-             certificate.add(deleteGiftCertificateById(id));
-             certificate.add(sortGiftCertificateByCreateDateLink);
-             certificate.add(sortGiftCertificateByNameLink);
-             certificate.add(sortGiftCertificateByPriceLink);
-             certificate.add(findGiftCertificateByNameLink);
-             certificate.add(findGiftCertificateByDescriptionLink);
-             certificate.add(findGiftCertificateByNameLink);
+             certificate.add(updateGiftCertificateById(id,certificate))
+                     .add(deleteGiftCertificateById(id))
+                     .add(sortGiftCertificateByCreateDateLink)
+                     .add(sortGiftCertificateByNameLink)
+                     .add(sortGiftCertificateByPriceLink)
+                     .add(findGiftCertificateByNameLink)
+                     .add(findGiftCertificateByDescriptionLink)
+                     .add(findGiftCertificateByNameLink);
          }
          return giftCertificateDTOList;
      }
@@ -165,8 +165,8 @@ public class GiftCertificateHateoas {
      static public GiftCertificateDto linksForUpdateGiftCertificate(
              GiftCertificateDto certificate,
              Long id){
-         certificate.add(deleteGiftCertificateById(id));
-         certificate.add(getAllGiftCertificatesLink);
+         certificate.add(deleteGiftCertificateById(id))
+                 .add(getAllGiftCertificatesLink);
          return certificate;
      }
 
@@ -181,9 +181,9 @@ public class GiftCertificateHateoas {
     static public GiftCertificateDto linksForAddingNewGiftCertificate(
             GiftCertificateDto certificate){
         Long id = certificate.getId();
-        certificate.add(updateGiftCertificateById(id, certificate));
-        certificate.add(deleteGiftCertificateById(id));
-        certificate.add(getAllGiftCertificatesLink);
+        certificate.add(updateGiftCertificateById(id, certificate))
+                .add(deleteGiftCertificateById(id))
+                .add(getAllGiftCertificatesLink);
         return certificate;
     }
 }

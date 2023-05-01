@@ -107,9 +107,9 @@ public class UserService {
         }
     }
 
-    public void addNewUserForOAuth2AuthenticatedUser(User user){
+    public User addNewUserForOAuth2AuthenticatedUser(User user){
         user.setRoles(List.of(new Role(Roles.ROLE_USER)));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
 
@@ -124,11 +124,8 @@ public class UserService {
         }
 
         return orderRepository.
-                findByUserID(
-                        userId,
-                        PageRequest.of(page, pageSize)).
-                stream().
-                toList();
+                findByUserID(userId,
+                        PageRequest.of(page, pageSize));
     }
 
     public Order getOrderByIdForUserId(Long orderId,
@@ -142,7 +139,7 @@ public class UserService {
 
         if(!orderRepository.existsById(orderId)){
             throw new ItemNotFoundException(
-                    String.format("There is not such order with (id = %d)",userId),
+                    String.format("There is not such order with (id = %d)",orderId),
                     40401L);
         }
 

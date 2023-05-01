@@ -88,7 +88,7 @@ public class AuthenticationService {
 
     public User registrateUser(UserDto userDto){
         User user = userMapper.toUser(userDto);
-        String password = user.getPassword();
+        String password = userDto.getPassword();
         String repeatPassword = userDto.getRepeatPassword();
         String email = user.getEmail();
         if(isUserWithSuchEmail(email)){

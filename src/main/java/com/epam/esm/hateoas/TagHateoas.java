@@ -38,8 +38,8 @@ public class TagHateoas {
     public static List<TagDto> linksForGettingAllTags(
             List<TagDto> tags){
         for(TagDto tagDTO: tags){
-            tagDTO.add(deleteTagByIdLink(tagDTO.getId()));
-            tagDTO.add(getMostWidelyUsedTag);
+            tagDTO.add(deleteTagByIdLink(tagDTO.getId()))
+                    .add(getMostWidelyUsedTag);
         }
         return tags;
     }
@@ -54,9 +54,9 @@ public class TagHateoas {
      * */
     public static TagDto linksForAddingNewTag(
             TagDto tagDTO){
-        tagDTO.add(getAllTagsLink);
-        tagDTO.add(deleteTagByIdLink(tagDTO.getId()));
-        tagDTO.add(getMostWidelyUsedTag);
+        tagDTO.add(getAllTagsLink)
+                .add(deleteTagByIdLink(tagDTO.getId()))
+                .add(getMostWidelyUsedTag);
         return tagDTO;
     }
 }
