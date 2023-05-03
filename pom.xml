@@ -11,6 +11,7 @@
     <groupId>com.epam.esm</groupId>
     <artifactId>spring-security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>spring-security</name>
     <description>spring-security</description>
     <properties>
@@ -147,6 +148,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.8</version>
@@ -243,19 +250,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Build an executable JAR -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.epam.esm.SpringSecurityApplication</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <artifactId>maven-war-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
